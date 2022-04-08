@@ -15,22 +15,42 @@ Win combinations
 two seperate array for X and O board positions if any win combo in array (even if 0412 in array. filter for win combos)
 """
 print("\n"
-      "0 | 1 | 2\n"
+     "0 | 1 | 2\n"
      "--+---+--\n"
      "3 | 4 | 5\n"
      "--+---+--\n"
      "6 | 7 | 8"
     "\n")
 
-def XO_Game() -> str:
+def XO_Game() -> str and bool:
     """
-    Pass a board position from 0-8 to mark position of XO.
+    Input a board position from 0-8 to mark position of XO.
     Returns the XO board with summary of move(s)
     """
+    moves = []
 
-    move_count = 0
+    # Game turns prompt and conditional rules based on valid move
+    for game in range(3):
+        board_position = int(input(': '))
+        moves.append(board_position)
 
-    X_positions = []
+        # Check if board loc has been taken already
+        for move in moves:
+            x = moves.count(board_position)
+            if moves.count(move) > 1:
+                print(x)
+                break
+    print(moves)
+
+    # Basic of Win Combos
+    if int(0) in moves and int(1) in moves and int(2) in moves:
+        print("Win")
+    else:
+        print("Loss")
+
+
+    """
+     X_positions = []
 
     O_positions = []
 
@@ -52,9 +72,5 @@ def XO_Game() -> str:
     if board_position <= int(2):
         row1 = ("0 | 1 | 2\n").replace(str(board_position), 'X')
         return (row1)
-
-
-def XO_winCombos() -> bool:
-    pass
-
+    """
 XO_Game()
