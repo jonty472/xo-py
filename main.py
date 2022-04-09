@@ -22,24 +22,27 @@ print("\n"
      "6 | 7 | 8"
     "\n")
 
-def XO_Game() -> str and bool:
+def XO_Game():
     """
     Input a board position from 0-8 to mark position of XO.
     Returns the XO board with summary of move(s)
     """
     moves = []
-
+    board = ["0", "1", "2"]
     # Game turns prompt and conditional rules based on valid move
     for game in range(3):
         board_position = int(input(': '))
         moves.append(board_position)
+        
+        # Update board
+        board[int(board_position)] = 'X'
+        print(board) #make a .format for loop to input board lst on board e.g. {i} 
 
         # Check if board loc has been taken already
-        for move in moves:
-            x = moves.count(board_position)
+        for move in reversed(moves):
             if moves.count(move) > 1:
-                print(x)
-                break
+                moves.remove(move)
+                return print("Position already taken. Try another move: ")
     print(moves)
 
     # Basic of Win Combos
