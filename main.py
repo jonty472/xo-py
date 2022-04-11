@@ -28,28 +28,32 @@ def XO_Game():
     Returns the XO board with summary of move(s)
     """
     moves = []
-    board = ["0", "1", "2"]
+    board = ["0", "1", "2", "3", "4", "5"]
     # Game turns prompt and conditional rules based on valid move
-    for game in range(3):
+    for game in range(5):
         board_position = int(input(': '))
         moves.append(board_position)
         
         # Update board
         board[int(board_position)] = 'X'
-        print(board) #make a .format for loop to input board lst on board e.g. {i} 
+        print("\n{} | {} | {}\n--+---+--\n{} | {} | {}\n".format(
+                                                board[0],board[1],board[2],
+                                                board[3],board[4],board[5],)) 
+                                                
+        #make a .format for loop to input board lst on board e.g. {i} 
 
         # Check if board loc has been taken already
         for move in reversed(moves):
             if moves.count(move) > 1:
                 moves.remove(move)
                 return print("Position already taken. Try another move: ")
+        
+        # Win Conditions
+        if int(0) in moves and int(1) in moves and int(2) in moves:
+            return print("Win")
     print(moves)
 
-    # Basic of Win Combos
-    if int(0) in moves and int(1) in moves and int(2) in moves:
-        print("Win")
-    else:
-        print("Loss")
+
 
 
     """
