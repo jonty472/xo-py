@@ -9,7 +9,7 @@ def xo_game():
     moves = []
     board = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-    for game in range(3):
+    for game in range(9):
         if move_count%2 == 0:
             move_count+=1
             x_move = player_move()
@@ -20,25 +20,29 @@ def xo_game():
 
         elif move_count%2 == 1:
             move_count+=1
-            #o_move = bot_move()
-            o_move = 5
+            o_move = bot_move(moves)
+            #o_move = 5
             o_moves.append(o_move)
             board[o_move] = 'O'
-            print('BOTS MOVE:')
-            print_board(board) 
             moves.append(o_move)
 
-        elif valid_move(moves) == False:
-            print('not valid move\nstart again...')
-            return xo_game()
-
+        
+            if valid_move(moves) == True:
+                print('BOTS MOVE:')
+                print_board(board)
+            else:
+                print('Not valid move\nNew game...')
+                break
+                
     print('x:', x_moves)
     print('o:', o_moves)
 
 
 
-def bot_move():
+def bot_move(moves):
     move = random.randint(1,9)
+    if move in moves:
+        return bot_move(moves) 
     return move
 
 def player_move():
@@ -46,7 +50,15 @@ def player_move():
     return move
 
 def print_board(board):
-    return print("\n{} | {} | {}\n--+---+--\n{} | {} | {}\n--+---+--\n{} | {} | {}\n".format(board[1],board[2],board[3],board[4],board[5],board[6],board[7],board[8],board[9],))
+    """
+    Input: takes a xo board as a list from values of a 3x3 board
+    Returns: a tic-tac-toe board in a visual manner 
+    """
+    return print("\n{} | {} | {}\n--+---+--\n{} | {} | {}\n--+---+--\n{} | {} | {}\n"
+    .format(
+        board[1],board[2],board[3],board[4],
+        board[5],board[6],board[7],
+        board[8],board[9],))
 
 def valid_move(moves):
     """
